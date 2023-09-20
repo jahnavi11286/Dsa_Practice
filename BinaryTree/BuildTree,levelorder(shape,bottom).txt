@@ -1,0 +1,118 @@
+BuildTree,levelorder,levelordershape,levelorderbottom
+
+#include<bits/stdc++.h>
+using namespace std;
+class node{
+      public:
+             int data;
+             node* left;
+             node* right;
+      node(int d){
+             this->data=d;
+             this->left=NULL;
+             this->right=NULL;
+      }
+};
+
+node* buildTree(node* root){
+             int data;
+             cin>>data;
+             root=new node(data);
+             if(data==-1)
+             {
+               return NULL;
+             }
+             root->left=buildTree(root->left);
+             root->right=buildTree(root->right);
+             return root;
+}
+void levelOrderTraversalShape(node* root)
+{
+            queue<node*> q;
+            q.push(root);
+            q.push(NULL);
+            while(!q.empty()){
+                  node* temp=q.front();
+                  q.pop();
+                  if(temp==NULL){
+                     cout<<endl;
+                     if(!q.empty()){
+                         q.push(NULL);
+                     }
+                  }
+                  else{
+                  cout<<temp->data<<" ";
+                  if(temp->left){
+                       q.push(temp->left);
+                  }
+                  if(temp->right)
+                {
+                   q.push(temp->right);
+                }
+               }
+}
+}
+
+void levelOrderTraversal(node* root)
+{
+            queue<node*> q;
+            q.push(root);
+            while(!q.empty()){
+                  node* temp=q.front();
+                  cout<<temp->data<<" ";
+                  q.pop();
+                  if(temp->left){
+                       q.push(temp->left);
+                  }
+                  if(temp->right)
+                {
+                   q.push(temp->right);
+                }
+           }
+}
+
+vector < vector < int >> levelOrderBottom(node * root) {
+  vector < vector < int >> v;
+  if (root == NULL)
+    return {};
+ 
+  queue < node * > q;
+  q.push(root);
+ 
+  while (q.empty() == false) {
+    vector < int > res;
+    int len = q.size();
+    for (int i = 0; i < len; i++) {
+      node * temp = q.front();
+      q.pop();
+ 
+      res.push_back(temp -> data);
+ 
+      if (temp -> left)
+        q.push(temp -> left);
+      if (temp -> right)
+        q.push(temp -> right);
+    }
+    v.push_back(res);
+  }
+  reverse(v.begin(), v.end());
+  return v;
+}
+
+int main()
+{
+    node* root= NULL;
+    root=buildTree(root);
+    levelOrderTraversalShape(root);
+    levelOrderTraversal(root);
+    cout<<endl;
+    vector<vector<int>> ans= levelOrderBottom(root);
+    for(vector<int> a: ans){
+        for(int b:a)
+        {
+            cout<<b<<" ";
+        }
+    }
+}
+
+
