@@ -1,4 +1,10 @@
 Diameter of binary tree
+approach 1
+using height function again 
+T.C :O(n^2)
+
+approach 2: naive solution
+T.C :O(n)
 
 class Solution {
 public:
